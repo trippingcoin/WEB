@@ -102,6 +102,9 @@ img {
             <input type="file" name="profilePic" required>
             <button type="submit">Upload Profile Picture</button>
         </form>
+    
+        <h3>Profile Picture</h3>
+        <img id="profileImage" src="/uploads/1739298843717-DAA.png" width="150" style="border-radius: 50%;" alt="Profile Picture">
 
         <form action="/update-user" method="POST">
             <input type="text" name="username" value="User" required>
@@ -112,7 +115,34 @@ img {
             <button type="submit" onclick="return confirm('Are you sure?')">Delete Account</button>
         </form>
 
-        <p><a href="/logout">Logout</a></p>
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("/get-profile-pic")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.profilePic) {
+                        document.getElementById("profileImage").src = data.profilePic;
+                    }
+                })
+                .catch(error => console.error("Error loading profile image:", error));
+        });
+    </script>
+    <script>
+        fetch('/get-user')
+            .then(response => response.json())
+            .then(user => {
+                if (user.role === "admin") {
+                    document.getElementById("adminLink").style.display = "block";
+                }
+            })
+            .catch(error => console.error('Error fetching user:', error));
+    </script>
+    
+    <a id="adminLink" href="/admin" style="display: none;">Go to Admin Panel</a>    
 </body>
 </html>

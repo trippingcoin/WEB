@@ -97,13 +97,25 @@ img {
     
     <div class="container">
         <h1>Register</h1>
-        <form action="/register" method="POST">
+        <form action="/auth/register" method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
-        </form>
+        </form>        
         <p>Already have an account? <a href="login.html">Login here</a></p>
     </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            let password = document.querySelector('input[name="password"]').value;
+    
+            if (password.length > 6) {
+                alert("⚠️ Password must be a maximum of 6 characters!");
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+    
 </body>
 </html>
