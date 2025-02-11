@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <p>Welcome, User!</p>
+
+        <form action="/upload-profile" method="POST" enctype="multipart/form-data">
+            <input type="file" name="profilePic" required>
+            <button type="submit">Upload Profile Picture</button>
+        </form>
+
+        <form action="/update-user" method="POST">
+            <input type="text" name="username" value="User" required>
+            <button type="submit">Update Username</button>
+        </form>
+
+        <form action="/delete-user" method="POST">
+            <button type="submit" onclick="return confirm('Are you sure?')">Delete Account</button>
+        </form>
+
+        <p><a href="/logout">Logout</a></p>
+    </div>
+</body>
+</html>
